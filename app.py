@@ -69,10 +69,10 @@ with st.form("prediction_form"):
     
     # --- TRONG PHẦN 5 ---
     for idx, key in enumerate(feature_keys):
-    label = features_map[key]
-    with col1 if idx < 12 else col2:
-        # Quan trọng: value=None giúp ô nhập liệu trống hoàn toàn
-        input_data[key] = st.number_input(label, value=None, placeholder="Chưa xác định...", format="%.4f")
+         label = features_map[key]
+         with col1 if idx < 12 else col2:
+         # Quan trọng: value=None giúp ô nhập liệu trống hoàn toàn
+            input_data[key] = st.number_input(label, value=None, placeholder="Chưa xác định...", format="%.4f")
             
     st.markdown("---")
     submit = st.form_submit_button("🔍 ANALYZE & PREDICT (PHÂN TÍCH & DỰ BÁO)")
