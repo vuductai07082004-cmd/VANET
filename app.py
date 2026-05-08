@@ -92,10 +92,10 @@ if submit:
         
         # Map kết quả
         labels = {
-            0: "🚨 NETWORK CONGESTION (Nghẽn mạng mức độ cao)",
-            1: "⚠️ CHANNEL SATURATION (Kênh truyền bão hòa)",
-            2: "✅ STABLE CONNECTIVITY (Kết nối ổn định)",
-            3: "🟢 OPTIMAL PERFORMANCE (Hiệu năng truyền dẫn tối ưu)"
+            0: "🚨 GRIDLOCK (Nghẽn mạng mức độ cao)",
+            1: "⚠️ HEAVY (Kênh truyền bão hòa)",
+            2: "✅ MODERATE (Kết nối ổn định)",
+            3: "🟢 FREE-FLOW (Hiệu năng truyền dẫn tối ưu)"
         }
         
         # Hiển thị kết quả
