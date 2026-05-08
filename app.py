@@ -20,14 +20,14 @@ def load_assets():
 model, scaler = load_assets()
 
 # 3. Tiêu đề và Mô tả song ngữ
-st.title("🚀 VANET Traffic Congestion Prediction System")
-st.subheader("Hệ thống Dự báo Tắc nghẽn Giao thông trong mạng VANET")
+st.title("🚀 VANET Network Performance & Congestion Analysis")
+st.subheader("Hệ thống Phân tích Hiệu năng Truyền thông và Dự báo Trạng thái Mạng VANET")
 
 st.markdown("""
 *This system utilizes **Naive Bayes (NBC)** and **Logistic Regression** models to analyze 24 network and traffic features to predict congestion levels in real-time.*
 *(Hệ thống sử dụng mô hình **Naive Bayes** và **Logistic Regression** để phân tích 24 đặc trưng mạng và giao thông nhằm dự báo mức độ tắc nghẽn theo thời gian thực.)*
 """)
-st.info(" UTC University - Research Project Demo (Đồ án Nghiên cứu)")
+st.info(" 💻 Ngành: Điện tử Viễn thông - Đồ án Nghiên cứu tối ưu hóa mạng thông tin di động")
 
 st.markdown("---")
 
@@ -89,10 +89,10 @@ if submit:
     
     # Map kết quả song ngữ
     labels = {
-        0: "🚨 GRIDLOCK (Kẹt xe nghiêm trọng)",
-        1: "⚠️ HEAVY (Giao thông đông đúc)",
-        2: "✅ MODERATE (Giao thông ổn định)",
-        3: "🟢 FREE-FLOW (Thông thoáng)"
+        3: "🚨 GRIDLOCK (Nghẽn mạng mức độ cao)",
+        2: "⚠️ HEAVY (Kênh truyền bão hòa)",
+        1: "✅ MODERATE (Kết nối ổn định)",
+        0: "🟢 FREE-FLOW (Hiệu năng truyền dẫn tối ưu)"
     }
     
     # Hiển thị kết quả
