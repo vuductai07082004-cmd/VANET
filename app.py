@@ -111,4 +111,4 @@ if submit:
     except Exception as e:
         st.error(f"❌ Có lỗi xảy ra: {e}")
 else:
-    st.write("👈 *Please enter parameters and click 'ANALYZE' to see results.*"). Toàn bộ code của tôi đây, bạn sửa giúp tôi
+    st.write("👈 *Please enter parameters and click 'ANALYZE' to see results.*")
