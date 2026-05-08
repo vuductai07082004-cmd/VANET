@@ -69,46 +69,46 @@ st.markdown("### 📝 Network & Traffic Parameters")
 col1, col2 = st.columns(2)
 input_data = {}
 feature_keys = list(features_map.keys()) 
-    for idx, key in enumerate(feature_keys):
-        label = features_map[key]
-        with col1 if idx < 12 else col2:
-            input_data[key] = st.number_input(label, value=None, placeholder="Chưa xác định...", format="%.4f")
-            
-    st.markdown("---")
-    submit = st.form_submit_button("🔍 ANALYZE & PREDICT")
+    for idx, key in enumerate(feature_keys):
+        label = features_map[key]
+        with col1 if idx < 12 else col2:
+            input_data[key] = st.number_input(label, value=None, placeholder="Chưa xác định...", format="%.4f")
+            
+    st.markdown("---")
+    submit = st.form_submit_button("🔍 ANALYZE & PREDICT")
 
 # 6. Xử lý dự đoán
 if submit:
-    try:
-        # Bù giá trị Mean cho ô trống
-        final_input = {}
-        for key in feature_keys:
-            if input_data[key] is None:
-                final_input[key] = mean_data[key]
-            else:
-                final_input[key] = input_data[key]
-        
-        # SỬA TẠI ĐÂY: Dùng final_input thay vì input_data
-        df_input = pd.DataFrame([final_input])
-        input_scaled = scaler.transform(df_input)
-        
-        pred = model.predict(input_scaled)[0]
-        probs = np.max(model.predict_proba(input_scaled)) * 100
-        
-        labels = {
-            0: "🚨 NETWORK CONGESTION (Nghẽn mạng mức độ cao)",
-            1: "⚠️ CHANNEL SATURATION (Kênh truyền bão hòa)",
-            2: "✅ STABLE CONNECTIVITY (Kết nối ổn định)",
-            3: "🟢 OPTIMAL PERFORMANCE (Hiệu năng truyền dẫn tối ưu)"
-        }
-        
-        st.markdown("### 📊 Network State Analysis")
-        color = "red" if pred <= 1 else "green"
-        st.subheader(f"Status: :{color}[{labels[pred]}]")
-        st.write(f"**Confidence:** {probs:.2f}%")
-        st.progress(probs / 100)
+    try:
+        # Bù giá trị Mean cho ô trống
+        final_input = {}
+        for key in feature_keys:
+            if input_data[key] is None:
+                final_input[key] = mean_data[key]
+            else:
+                final_input[key] = input_data[key]
+        
+        # SỬA TẠI ĐÂY: Dùng final_input thay vì input_data
+        df_input = pd.DataFrame([final_input])
+        input_scaled = scaler.transform(df_input)
+        
+        pred = model.predict(input_scaled)[0]
+        probs = np.max(model.predict_proba(input_scaled)) * 100
+        
+        labels = {
+            0: "🚨 NETWORK CONGESTION (Nghẽn mạng mức độ cao)",
+            1: "⚠️ CHANNEL SATURATION (Kênh truyền bão hòa)",
+            2: "✅ STABLE CONNECTIVITY (Kết nối ổn định)",
+            3: "🟢 OPTIMAL PERFORMANCE (Hiệu năng truyền dẫn tối ưu)"
+        }
+        
+        st.markdown("### 📊 Network State Analysis")
+        color = "red" if pred <= 1 else "green"
+        st.subheader(f"Status: :{color}[{labels[pred]}]")
+        st.write(f"**Confidence:** {probs:.2f}%")
+        st.progress(probs / 100)
 
-    except Exception as e:
-        st.error(f"❌ Có lỗi xảy ra: {e}")
+    except Exception as e:
+        st.error(f"❌ Có lỗi xảy ra: {e}")
 else:
-    st.write("👈 *Please enter parameters and click 'ANALYZE' to see results.*"). Toàn bộ code của tôi đây, bạn sửa giúp tôi
+    st.write("👈 *Please enter parameters and click 'ANALYZE' to see results.*"). Toàn bộ code của tôi đây, bạn sửa giúp tôi
