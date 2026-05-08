@@ -59,9 +59,9 @@ features_map = {
     'weather_factor': 'Yếu tố thời tiết - Weather Factor'
 }
 
-# 5. Giao diện nhập liệu chia làm 2 cột
+# --- PHẦN 5: GIAO DIỆN NHẬP LIỆU ---
 with st.form("prediction_form"):
-    st.markdown("### 📝 Input Features (Nhập các thông số đặc trưng)")
+    st.markdown("### 📝 Network & Traffic Parameters (Tham số Mạng & Giao thông)")
     col1, col2 = st.columns(2)
     
     input_data = {}
@@ -70,42 +70,41 @@ with st.form("prediction_form"):
     for idx, key in enumerate(feature_keys):
         label = features_map[key]
         with col1 if idx < 12 else col2:
-            # Sửa value=None để ô nhập liệu trống ban đầu
-            input_data[key] = st.number_input(label, value=None, placeholder="Nhập giá trị...", format="%.4f")
+            # Dùng value=0.0 nhưng thêm step=0.1 để giao diện linh hoạt hơn
+            # Hoặc dùng value=None nhưng phải xử lý ở bước dự đoán
+            input_data[key] = st.number_input(label, value=0.0, format="%.4f")
             
     st.markdown("---")
     submit = st.form_submit_button("🔍 ANALYZE & PREDICT (PHÂN TÍCH & DỰ BÁO)")
 
-# 6. Xử lý kết quả
+# --- PHẦN 6: XỬ LÝ DỰ ĐOÁN (ĐÃ THÊM BỘ LỌC LỖI) ---
 if submit:
-    # Chuẩn bị dữ liệu
-    df_input = pd.DataFrame([input_data])
-    
-    # Chuẩn hóa
-    input_scaled = scaler.transform(df_input)
-    
-    # Dự đoán
-    pred = model.predict(input_scaled)[0]
-    probs = np.max(model.predict_proba(input_scaled)) * 100
-    
-    # Map kết quả song ngữ
-    labels = {
-        3: "🚨 GRIDLOCK (Nghẽn mạng mức độ cao)",
-        2: "⚠️ HEAVY (Kênh truyền bão hòa)",
-        1: "✅ MODERATE (Kết nối ổn định)",
-        0: "🟢 FREE-FLOW (Hiệu năng truyền dẫn tối ưu)"
-    }
-    
-    # Hiển thị kết quả
-    st.markdown("### 📊 Prediction Result (Kết quả dự báo)")
-    
-    # Chọn màu sắc cho kết quả
-    color = "red" if pred <= 1 else "green"
-    
-    st.subheader(f"Status: :{color}[{labels[pred]}]")
-    st.write(f"**Confidence (Độ tin cậy):** {probs:.2f}%")
-    
-    # Hiển thị thanh tiến trình độ tin cậy
-    st.progress(probs / 100)
-    
-    st.balloons() # Hiệu ứng chúc mừng khi dự đoán xong
+    try:
+        # Chuyển dữ liệu về DataFrame và xử lý các giá trị None thành 0
+        df_input = pd.DataFrame([input_data]).fillna(0.0)
+        
+        # Chuẩn hóa
+        input_scaled = scaler.transform(df_input)
+        
+        # Dự đoán
+        pred = model.predict(input_scaled)[0]
+        probs = np.max(model.predict_proba(input_scaled)) * 100
+        
+        # Map kết quả
+        labels = {
+            0: "🚨 NETWORK CONGESTION (Nghẽn mạng mức độ cao)",
+            1: "⚠️ CHANNEL SATURATION (Kênh truyền bão hòa)",
+            2: "✅ STABLE CONNECTIVITY (Kết nối ổn định)",
+            3: "🟢 OPTIMAL PERFORMANCE (Hiệu năng truyền dẫn tối ưu)"
+        }
+        
+        # Hiển thị kết quả
+        st.markdown("### 📊 Network State Analysis")
+        color = "red" if pred <= 1 else "green"
+        st.subheader(f"Status: :{color}[{labels[pred]}]")
+        st.write(f"**Confidence (Độ tin cậy):** {probs:.2f}%")
+        st.progress(probs / 100)
+        st.balloons()
+
+    except Exception as e:
+        st.error(f"❌ Có lỗi xảy ra: {e}. Vui lòng kiểm tra lại các giá trị nhập vào!")
