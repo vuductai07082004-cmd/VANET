@@ -27,7 +27,7 @@ st.markdown("""
 *This system utilizes **Naive Bayes (NBC)** and **Logistic Regression** models to analyze 24 network and traffic features to predict congestion levels in real-time.*
 *(Hệ thống sử dụng mô hình **Naive Bayes** và **Logistic Regression** để phân tích 24 đặc trưng mạng và giao thông nhằm dự báo mức độ tắc nghẽn theo thời gian thực.)*
 """)
-st.info(" 💻 Ngành: Điện tử Viễn thông - Đồ án Nghiên cứu tối ưu hóa mạng thông tin di động")
+st.info(" 💻 Ngành: Điện tử Viễn thông - Nghiên cứu tối ưu hóa mạng thông tin di động")
 
 st.markdown("---")
 
