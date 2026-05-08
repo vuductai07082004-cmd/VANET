@@ -11,13 +11,17 @@ st.set_page_config(
 )
 
 # 2. Tải mô hình và bộ chuẩn hóa
+# Ở phần đầu file app.py
 @st.cache_resource
 def load_assets():
     model = joblib.load('vanet_nbc_model.pkl')
     scaler = joblib.load('vanet_scaler.pkl')
-    return model, scaler
+    # PHẢI CÓ DÒNG NÀY ĐỂ ĐỊNH NGHĨA mean_data
+    mean_data = joblib.load('vanet_means.pkl') 
+    return model, scaler, mean_data
 
-model, scaler = load_assets()
+# Khi gọi hàm cũng phải nhận đủ 3 biến
+model, scaler, mean_data = load_assets()
 
 # 3. Tiêu đề và Mô tả song ngữ
 st.title("🚀 VANET Network Performance & Congestion Analysis")
