@@ -70,7 +70,8 @@ with st.form("prediction_form"):
     for idx, key in enumerate(feature_keys):
         label = features_map[key]
         with col1 if idx < 12 else col2:
-            input_data[key] = st.number_input(label, value=0.0, format="%.4f")
+            # Sửa value=None để ô nhập liệu trống ban đầu
+            input_data[key] = st.number_input(label, value=None, placeholder="Nhập giá trị...", format="%.4f")
             
     st.markdown("---")
     submit = st.form_submit_button("🔍 ANALYZE & PREDICT (PHÂN TÍCH & DỰ BÁO)")
