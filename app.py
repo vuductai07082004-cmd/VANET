@@ -68,7 +68,7 @@ with st.form("prediction_form"):
 st.markdown("### 📝 Network & Traffic Parameters")
 col1, col2 = st.columns(2)
 input_data = {}
-feature_keys = list(features_map.keys()) 
+    feature_keys = list(features_map.keys()) 
     for idx, key in enumerate(feature_keys):
         label = features_map[key]
         with col1 if idx < 12 else col2:
