@@ -104,7 +104,7 @@ if submit:
         st.subheader(f"Status: :{color}[{labels[pred]}]")
         st.write(f"**Confidence (Độ tin cậy):** {probs:.2f}%")
         st.progress(probs / 100)
-        st.balloons()
+        
 
     except Exception as e:
         st.error(f"❌ Có lỗi xảy ra: {e}. Vui lòng kiểm tra lại các giá trị nhập vào!")
