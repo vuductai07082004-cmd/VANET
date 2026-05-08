@@ -67,12 +67,12 @@ with st.form("prediction_form"):
     input_data = {}
     feature_keys = list(features_map.keys())
     
-    for idx, key in enumerate(feature_keys):
-        label = features_map[key]
-        with col1 if idx < 12 else col2:
-            # Dùng value=0.0 nhưng thêm step=0.1 để giao diện linh hoạt hơn
-            # Hoặc dùng value=None nhưng phải xử lý ở bước dự đoán
-            input_data[key] = st.number_input(label, value=0.0, format="%.4f")
+    # --- TRONG PHẦN 5 ---
+for idx, key in enumerate(feature_keys):
+    label = features_map[key]
+    with col1 if idx < 12 else col2:
+        # Quan trọng: value=None giúp ô nhập liệu trống hoàn toàn
+        input_data[key] = st.number_input(label, value=None, placeholder="Chưa xác định...", format="%.4f")
             
     st.markdown("---")
     submit = st.form_submit_button("🔍 ANALYZE & PREDICT (PHÂN TÍCH & DỰ BÁO)")
@@ -81,6 +81,15 @@ with st.form("prediction_form"):
 # Chỉ thực hiện khi người dùng nhấn nút "submit" của Form
 if submit:
     try:
+        # Tạo một bản sao để xử lý, tránh ảnh hưởng đến input gốc
+        final_input = {}
+        
+        for key in feature_keys:
+            # KIỂM TRA: Nếu người dùng để trống (None), lấy giá trị Mean bù vào
+            if input_data[key] is None:
+                final_input[key] = mean_data[key]
+            else:
+                final_input[key] = input_data[key]
         # 1. Chuyển dữ liệu về DataFrame
         df_input = pd.DataFrame([input_data])
         
