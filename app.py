@@ -77,20 +77,21 @@ with st.form("prediction_form"):
     st.markdown("---")
     submit = st.form_submit_button("🔍 ANALYZE & PREDICT (PHÂN TÍCH & DỰ BÁO)")
 
-# --- PHẦN 6: XỬ LÝ DỰ ĐOÁN (ĐÃ THÊM BỘ LỌC LỖI) ---
+# --- PHẦN 6: XỬ LÝ DỰ ĐOÁN ---
+# Chỉ thực hiện khi người dùng nhấn nút "submit" của Form
 if submit:
     try:
-        # Chuyển dữ liệu về DataFrame và xử lý các giá trị None thành 0
-        df_input = pd.DataFrame([input_data]).fillna(0.0)
+        # 1. Chuyển dữ liệu về DataFrame
+        df_input = pd.DataFrame([input_data])
         
-        # Chuẩn hóa
+        # 2. Chuẩn hóa dữ liệu
         input_scaled = scaler.transform(df_input)
         
-        # Dự đoán
+        # 3. Thực hiện dự đoán
         pred = model.predict(input_scaled)[0]
         probs = np.max(model.predict_proba(input_scaled)) * 100
         
-        # Map kết quả
+        # 4. Định nghĩa nhãn kết quả
         labels = {
             0: "🚨 GRIDLOCK (Nghẽn mạng mức độ cao)",
             1: "⚠️ HEAVY (Kênh truyền bão hòa)",
@@ -98,13 +99,18 @@ if submit:
             3: "🟢 FREE-FLOW (Hiệu năng truyền dẫn tối ưu)"
         }
         
-        # Hiển thị kết quả
+        # 5. Hiển thị kết quả (Toàn bộ phần này phải nằm TRONG lệnh IF SUBMIT)
+        st.markdown("---")
         st.markdown("### 📊 Network State Analysis")
+        
         color = "red" if pred <= 1 else "green"
         st.subheader(f"Status: :{color}[{labels[pred]}]")
         st.write(f"**Confidence (Độ tin cậy):** {probs:.2f}%")
         st.progress(probs / 100)
-        
 
     except Exception as e:
-        st.error(f"❌ Có lỗi xảy ra: {e}. Vui lòng kiểm tra lại các giá trị nhập vào!")
+        st.error(f"❌ Có lỗi xảy ra: {e}")
+else:
+    # Nếu chưa nhấn nút, có thể hiện một thông báo nhẹ nhàng
+    st.write("👈 *Please enter parameters and click 'ANALYZE' to see results.*")
+    st.write("*(Vui lòng nhập các thông số và nhấn 'ANALYZE' để xem kết quả.)*")
