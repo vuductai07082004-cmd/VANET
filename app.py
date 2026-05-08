@@ -68,7 +68,7 @@ with st.form("prediction_form"):
     feature_keys = list(features_map.keys())
     
     # --- TRONG PHẦN 5 ---
-for idx, key in enumerate(feature_keys):
+    for idx, key in enumerate(feature_keys):
     label = features_map[key]
     with col1 if idx < 12 else col2:
         # Quan trọng: value=None giúp ô nhập liệu trống hoàn toàn
