@@ -65,10 +65,10 @@ features_map = {
 
 # 5. Giao diện nhập liệu
 with st.form("prediction_form"):
-    st.markdown("### 📝 Network & Traffic Parameters")
-    col1, col2 = st.columns(2)
-    input_data = {}
-    feature_keys = list(features_map.keys())
+st.markdown("### 📝 Network & Traffic Parameters")
+col1, col2 = st.columns(2)
+input_data = {}
+feature_keys = list(features_map.keys())
     
     for idx, key in enumerate(feature_keys):
         label = features_map[key]
