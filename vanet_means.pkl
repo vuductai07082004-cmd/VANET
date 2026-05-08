@@ -1,8 +1,0 @@
-import joblib
-
-# Tính giá trị trung bình của từng cột trong tập huấn luyện
-mean_values = X_train.mean().to_dict()
-
-# Lưu vào file
-joblib.dump(mean_values, 'vanet_means.pkl')
-print("Đã lưu file trung bình thành công! Hãy tải file 'vanet_means.pkl' về và up lên GitHub nhé.")
