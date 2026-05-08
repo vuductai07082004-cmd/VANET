@@ -17,10 +17,10 @@ try:
 model = joblib.load('vanet_nbc_model.pkl')
 scaler = joblib.load('vanet_scaler.pkl')
 mean_data = joblib.load('vanet_means.pkl')
-        return model, scaler, mean_data
-    except Exception as e:
-        st.error(f"Lỗi tải file hệ thống: {e}")
-        return None, None, None
+return model, scaler, mean_data
+except Exception as e:
+st.error(f"Lỗi tải file hệ thống: {e}")
+return None, None, None
 
 model, scaler, mean_data = load_assets()
 
