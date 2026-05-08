@@ -5,9 +5,9 @@ import numpy as np
 
 # 1. Cấu hình trang Web
 st.set_page_config(
-    page_title="VANET Congestion Prediction",
-    page_icon="🚀",
-    layout="wide"
+page_title="VANET Congestion Prediction",
+page_icon="🚀",
+layout="wide"
 )
 
 # 2. Tải mô hình và bộ chuẩn hóa
