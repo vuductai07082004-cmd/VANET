@@ -96,10 +96,10 @@ if submit:
         probs = np.max(model.predict_proba(input_scaled)) * 100
         
         labels = {
-            0: "🚨 NETWORK CONGESTION (Nghẽn mạng mức độ cao)",
-            1: "⚠️ CHANNEL SATURATION (Kênh truyền bão hòa)",
-            2: "✅ STABLE CONNECTIVITY (Kết nối ổn định)",
-            3: "🟢 OPTIMAL PERFORMANCE (Hiệu năng truyền dẫn tối ưu)"
+            0: "🚨 FREE-FLOW (Thông thoáng)",
+            1: "⚠️ MODERATE (Bình thường)",
+            2: "✅ HEAVY (Mật độ cao)",
+            3: "🟢 GRIDLOCK (Tắc nghẽn nghiêm trọng)"
         }
         
         st.markdown("### 📊 Network State Analysis")
