@@ -103,7 +103,7 @@ if submit:
         }
         
         st.markdown("### 📊 Network State Analysis")
-        color = "red" if pred <= 1 else "green"
+        color = "green" if pred <= 1 else "red"
         st.subheader(f"Status: :{color}[{labels[pred]}]")
         st.write(f"**Confidence:** {probs:.2f}%")
         st.progress(probs / 100)
